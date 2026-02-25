@@ -14,25 +14,25 @@ interface SmokeParticle {
 }
 
 const DARK_COLORS = [
-  "rgba(139,92,246,0.8)",   // purple
-  "rgba(59,130,246,0.8)",   // blue
-  "rgba(236,72,153,0.8)",   // pink
-  "rgba(16,185,129,0.8)",   // green
-  "rgba(245,158,11,0.8)",   // amber
-  "rgba(239,68,68,0.8)",    // red
-  "rgba(99,102,241,0.8)",   // indigo
-  "rgba(20,184,166,0.8)",   // teal
+  "rgba(139,92,246,0.8)",
+  "rgba(59,130,246,0.8)",
+  "rgba(236,72,153,0.8)",
+  "rgba(16,185,129,0.8)",
+  "rgba(245,158,11,0.8)",
+  "rgba(239,68,68,0.8)",
+  "rgba(99,102,241,0.8)",
+  "rgba(20,184,166,0.8)",
 ];
 
 const LIGHT_COLORS = [
-  "rgba(251,191,36,0.8)",   // yellow
-  "rgba(249,115,22,0.8)",   // orange
-  "rgba(239,68,68,0.8)",    // red
-  "rgba(16,185,129,0.8)",   // green
-  "rgba(59,130,246,0.8)",   // blue
-  "rgba(236,72,153,0.8)",   // pink
-  "rgba(139,92,246,0.8)",   // purple
-  "rgba(20,184,166,0.8)",   // teal
+  "rgba(251,191,36,0.8)",
+  "rgba(249,115,22,0.8)",
+  "rgba(239,68,68,0.8)",
+  "rgba(16,185,129,0.8)",
+  "rgba(59,130,246,0.8)",
+  "rgba(236,72,153,0.8)",
+  "rgba(139,92,246,0.8)",
+  "rgba(20,184,166,0.8)",
 ];
 
 export default function Home() {
@@ -54,7 +54,6 @@ export default function Home() {
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      // Update cursor position always
       setCursor({ x: e.clientX, y: e.clientY });
 
       const dx = e.clientX - lastPos.current.x;
@@ -64,15 +63,12 @@ export default function Home() {
       lastPos.current = { x: e.clientX, y: e.clientY };
 
       const colors = darkMode ? DARK_COLORS : LIGHT_COLORS;
-
-      // Spawn 2-3 particles at once with different colors
       const count = Math.floor(Math.random() * 2) + 2;
       const newParticles: SmokeParticle[] = [];
 
       for (let i = 0; i < count; i++) {
         const color = colors[colorIndexRef.current % colors.length];
         colorIndexRef.current++;
-
         newParticles.push({
           id: counterRef.current++,
           x: e.clientX + (Math.random() - 0.5) * 20,
@@ -84,11 +80,9 @@ export default function Home() {
         });
       }
 
-      // Update cursor color to latest color
       setCursorColor(
         colors[colorIndexRef.current % colors.length].replace(/[\d.]+\)$/, "1)")
       );
-
       setParticles((prev) => [...prev.slice(-60), ...newParticles]);
     },
     [darkMode]
@@ -107,7 +101,7 @@ export default function Home() {
           : "bg-gradient-to-br from-white via-gray-100 to-white text-gray-900"
       }`}
     >
-      {/* CUSTOM CURSOR CIRCLE */}
+      {/* CUSTOM CURSOR */}
       <div
         style={{
           position: "fixed",
@@ -185,14 +179,79 @@ export default function Home() {
 
       {/* HERO */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-32">
-        <motion.h1
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-6xl font-bold mb-6"
+
+        {/* FANCY NAME */}
+        <motion.div
+          initial={{ opacity: 0, y: -50, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-6 relative"
         >
-          Muhammad Awais
-        </motion.h1>
+          {/* Glow behind name */}
+          <div
+            className="absolute inset-0 blur-3xl opacity-40 rounded-full"
+            style={{
+              background: darkMode
+                ? "radial-gradient(ellipse, rgba(139,92,246,0.6) 0%, rgba(59,130,246,0.4) 50%, transparent 70%)"
+                : "radial-gradient(ellipse, rgba(249,115,22,0.5) 0%, rgba(234,179,8,0.4) 50%, transparent 70%)",
+              transform: "scale(1.4)",
+            }}
+          />
+
+          {/* Main Name */}
+          <h1
+            className="relative text-6xl md:text-8xl font-black tracking-tight leading-none"
+            style={{
+              fontFamily: "'Georgia', serif",
+              background: darkMode
+                ? "linear-gradient(135deg, #fff 0%, #a78bfa 30%, #818cf8 55%, #67e8f9 80%, #fff 100%)"
+                : "linear-gradient(135deg, #1e1e1e 0%, #7c3aed 30%, #db2777 60%, #ea580c 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter: darkMode
+                ? "drop-shadow(0 0 30px rgba(139,92,246,0.7)) drop-shadow(0 0 60px rgba(99,102,241,0.4))"
+                : "drop-shadow(0 0 20px rgba(124,58,237,0.5)) drop-shadow(0 0 40px rgba(219,39,119,0.3))",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Muhammad
+            <br />
+            <span
+              style={{
+                fontSize: "1.15em",
+                background: darkMode
+                  ? "linear-gradient(135deg, #f0abfc 0%, #c084fc 25%, #818cf8 50%, #38bdf8 75%, #a5f3fc 100%)"
+                  : "linear-gradient(135deg, #7c3aed 0%, #db2777 40%, #ea580c 80%, #f59e0b 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                display: "inline-block",
+                letterSpacing: "0.08em",
+              }}
+            >
+              AWAIS
+            </span>
+          </h1>
+
+          {/* Decorative underline */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+            className="mt-3 mx-auto rounded-full"
+            style={{
+              height: "3px",
+              width: "60%",
+              background: darkMode
+                ? "linear-gradient(90deg, transparent, #a78bfa, #67e8f9, transparent)"
+                : "linear-gradient(90deg, transparent, #7c3aed, #db2777, transparent)",
+              boxShadow: darkMode
+                ? "0 0 12px rgba(167,139,250,0.8)"
+                : "0 0 12px rgba(124,58,237,0.6)",
+            }}
+          />
+        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -295,8 +354,41 @@ export default function Home() {
           Let's build something amazing together.
         </p>
         <div className="space-y-2">
-          <p>Email: your@eemail.com</p>
-          <p>GitHub: github.com/yourusername</p>
+         <p>
+  Email:{" "}
+  <a
+    href="mailto:muhammadawaisjaved388@gmail.com"
+    className={`underline ${
+      darkMode
+        ? "text-indigo-400 hover:text-indigo-300"
+        : "text-indigo-600 hover:text-indigo-500"
+    }`}
+  >
+    muhammadawaisjaved388@gmail.com
+  </a>
+</p>
+          <p>
+            GitHub:{" "}
+            <a
+              href="https://github.com/awiasjaved"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`underline ${darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-500"}`}
+            >
+              github.com/awiasjaved
+            </a>
+          </p>
+          <p>
+            Linked In:{" "}
+            <a
+              href="https://www.linkedin.com/in/muhammad-awais-436459222/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`underline ${darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-500"}`}
+            >
+              Muhammad Awais
+            </a>
+          </p>
         </div>
       </section>
     </main>
