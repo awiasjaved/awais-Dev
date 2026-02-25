@@ -199,38 +199,9 @@ export default function Home() {
           />
 
           {/* Main Name */}
-          <h1
-            className="relative text-6xl md:text-8xl font-black tracking-tight leading-none"
-            style={{
-              fontFamily: "'Georgia', serif",
-              background: darkMode
-                ? "linear-gradient(135deg, #fff 0%, #a78bfa 30%, #818cf8 55%, #67e8f9 80%, #fff 100%)"
-                : "linear-gradient(135deg, #1e1e1e 0%, #7c3aed 30%, #db2777 60%, #ea580c 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: darkMode
-                ? "drop-shadow(0 0 30px rgba(139,92,246,0.7)) drop-shadow(0 0 60px rgba(99,102,241,0.4))"
-                : "drop-shadow(0 0 20px rgba(124,58,237,0.5)) drop-shadow(0 0 40px rgba(219,39,119,0.3))",
-              letterSpacing: "-0.02em",
-            }}
-          >
+          <h1 className="text-7xl font-bold">
             MUHAMMAD AWAIS
-            <span
-              style={{
-                fontSize: "1.15em",
-                background: darkMode
-                  ? "linear-gradient(135deg, #f0abfc 0%, #c084fc 25%, #818cf8 50%, #38bdf8 75%, #a5f3fc 100%)"
-                  : "linear-gradient(135deg, #7c3aed 0%, #db2777 40%, #ea580c 80%, #f59e0b 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                display: "inline-block",
-                letterSpacing: "0.08em",
-              }}
-            >
-              
-            </span>
+           
           </h1>
 
           {/* Decorative underline */}
