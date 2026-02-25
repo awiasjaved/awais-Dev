@@ -13,11 +13,36 @@ interface SmokeParticle {
   driftY: number;
 }
 
+const DARK_COLORS = [
+  "rgba(139,92,246,0.8)",   // purple
+  "rgba(59,130,246,0.8)",   // blue
+  "rgba(236,72,153,0.8)",   // pink
+  "rgba(16,185,129,0.8)",   // green
+  "rgba(245,158,11,0.8)",   // amber
+  "rgba(239,68,68,0.8)",    // red
+  "rgba(99,102,241,0.8)",   // indigo
+  "rgba(20,184,166,0.8)",   // teal
+];
+
+const LIGHT_COLORS = [
+  "rgba(251,191,36,0.8)",   // yellow
+  "rgba(249,115,22,0.8)",   // orange
+  "rgba(239,68,68,0.8)",    // red
+  "rgba(16,185,129,0.8)",   // green
+  "rgba(59,130,246,0.8)",   // blue
+  "rgba(236,72,153,0.8)",   // pink
+  "rgba(139,92,246,0.8)",   // purple
+  "rgba(20,184,166,0.8)",   // teal
+];
+
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
   const [particles, setParticles] = useState<SmokeParticle[]>([]);
+  const [cursor, setCursor] = useState({ x: -100, y: -100 });
+  const [cursorColor, setCursorColor] = useState("rgba(139,92,246,1)");
   const counterRef = useRef(0);
   const lastPos = useRef({ x: 0, y: 0 });
+  const colorIndexRef = useRef(0);
 
   useEffect(() => {
     if (darkMode) {
@@ -29,39 +54,42 @@ export default function Home() {
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
+      // Update cursor position always
+      setCursor({ x: e.clientX, y: e.clientY });
+
       const dx = e.clientX - lastPos.current.x;
       const dy = e.clientY - lastPos.current.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 10) return;
+      if (dist < 8) return;
       lastPos.current = { x: e.clientX, y: e.clientY };
 
-      const darkColors = [
-        "rgba(139,92,246,0.65)",
-        "rgba(99,102,241,0.55)",
-        "rgba(167,139,250,0.45)",
-        "rgba(196,181,253,0.35)",
-        "rgba(109,40,217,0.5)",
-      ];
-      const lightColors = [
-        "rgba(251,191,36,0.55)",
-        "rgba(249,115,22,0.45)",
-        "rgba(234,179,8,0.45)",
-        "rgba(253,186,116,0.35)",
-        "rgba(245,158,11,0.5)",
-      ];
-      const colors = darkMode ? darkColors : lightColors;
+      const colors = darkMode ? DARK_COLORS : LIGHT_COLORS;
 
-      const newParticle: SmokeParticle = {
-        id: counterRef.current++,
-        x: e.clientX,
-        y: e.clientY,
-        size: Math.random() * 50 + 25,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        driftX: (Math.random() - 0.5) * 80,
-        driftY: -(Math.random() * 100 + 40),
-      };
+      // Spawn 2-3 particles at once with different colors
+      const count = Math.floor(Math.random() * 2) + 2;
+      const newParticles: SmokeParticle[] = [];
 
-      setParticles((prev) => [...prev.slice(-50), newParticle]);
+      for (let i = 0; i < count; i++) {
+        const color = colors[colorIndexRef.current % colors.length];
+        colorIndexRef.current++;
+
+        newParticles.push({
+          id: counterRef.current++,
+          x: e.clientX + (Math.random() - 0.5) * 20,
+          y: e.clientY + (Math.random() - 0.5) * 20,
+          size: Math.random() * 55 + 25,
+          color,
+          driftX: (Math.random() - 0.5) * 100,
+          driftY: -(Math.random() * 110 + 40),
+        });
+      }
+
+      // Update cursor color to latest color
+      setCursorColor(
+        colors[colorIndexRef.current % colors.length].replace(/[\d.]+\)$/, "1)")
+      );
+
+      setParticles((prev) => [...prev.slice(-60), ...newParticles]);
     },
     [darkMode]
   );
@@ -79,6 +107,24 @@ export default function Home() {
           : "bg-gradient-to-br from-white via-gray-100 to-white text-gray-900"
       }`}
     >
+      {/* CUSTOM CURSOR CIRCLE */}
+      <div
+        style={{
+          position: "fixed",
+          left: cursor.x - 16,
+          top: cursor.y - 16,
+          width: 32,
+          height: 32,
+          borderRadius: "50%",
+          border: `2.5px solid ${cursorColor}`,
+          boxShadow: `0 0 12px ${cursorColor}, 0 0 24px ${cursorColor}`,
+          background: cursorColor.replace(/[\d.]+\)$/, "0.15)"),
+          pointerEvents: "none",
+          zIndex: 9999,
+          transition: "border-color 0.2s, box-shadow 0.2s, background 0.2s",
+        }}
+      />
+
       {/* SMOKE PARTICLES */}
       <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
         <AnimatePresence>
@@ -86,19 +132,19 @@ export default function Home() {
             <motion.div
               key={p.id}
               initial={{
-                opacity: 0.9,
-                scale: 0.4,
+                opacity: 0.95,
+                scale: 0.3,
                 x: p.x - p.size / 2,
                 y: p.y - p.size / 2,
               }}
               animate={{
                 opacity: 0,
-                scale: 3.5,
+                scale: 4,
                 x: p.x - p.size / 2 + p.driftX,
                 y: p.y - p.size / 2 + p.driftY,
               }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               onAnimationComplete={() => removeParticle(p.id)}
               style={{
                 position: "fixed",
@@ -115,9 +161,6 @@ export default function Home() {
           ))}
         </AnimatePresence>
       </div>
-
-      {/* CUSTOM CURSOR */}
-      {/* (cursor is hidden via cursor-none, smoke IS the cursor) */}
 
       {/* DARK MODE TOGGLE */}
       <div className="fixed top-5 right-6 z-50">
@@ -252,7 +295,7 @@ export default function Home() {
           Let's build something amazing together.
         </p>
         <div className="space-y-2">
-          <p>Email: your@email.com</p>
+          <p>Email: your@eemail.com</p>
           <p>GitHub: github.com/yourusername</p>
         </div>
       </section>
