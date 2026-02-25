@@ -215,8 +215,7 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            Muhammad
-            <br />
+            MUHAMMAD AWAIS
             <span
               style={{
                 fontSize: "1.15em",
@@ -230,7 +229,7 @@ export default function Home() {
                 letterSpacing: "0.08em",
               }}
             >
-              AWAIS
+              
             </span>
           </h1>
 
