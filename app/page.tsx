@@ -81,11 +81,14 @@ export default function Home() {
       }
 
       setCursorColor(
-        colors[colorIndexRef.current % colors.length].replace(/[\d.]+\)$/, "1)")
+        colors[colorIndexRef.current % colors.length].replace(
+          /[\d.]+\)$/,
+          "1)",
+        ),
       );
       setParticles((prev) => [...prev.slice(-60), ...newParticles]);
     },
-    [darkMode]
+    [darkMode],
   );
 
   const removeParticle = useCallback((id: number) => {
@@ -169,7 +172,9 @@ export default function Home() {
         >
           <span
             className={`absolute top-1 left-1 w-6 h-6 rounded-full flex items-center justify-center text-sm transition-all duration-500 shadow-md ${
-              darkMode ? "translate-x-8 bg-indigo-500" : "translate-x-0 bg-white"
+              darkMode
+                ? "translate-x-8 bg-indigo-500"
+                : "translate-x-0 bg-white"
             }`}
           >
             {darkMode ? "🌙" : "☀️"}
@@ -179,7 +184,6 @@ export default function Home() {
 
       {/* HERO */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-32">
-
         {/* FANCY NAME */}
         <motion.div
           initial={{ opacity: 0, y: -50, scale: 0.85 }}
@@ -201,7 +205,6 @@ export default function Home() {
           {/* Main Name */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight break-words">
             MUHAMMAD AWAIS
-           
           </h1>
 
           {/* Decorative underline */}
@@ -231,14 +234,16 @@ export default function Home() {
             darkMode ? "text-gray-400" : "text-gray-500"
           }`}
         >
-          Full Stack React & Node.js Developer
+          MERN Stack React & Node.js Developer
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className={darkMode ? "max-w-2xl text-gray-500" : "max-w-2xl text-gray-600"}
+          className={
+            darkMode ? "max-w-2xl text-gray-500" : "max-w-2xl text-gray-600"
+          }
         >
           I build modern, scalable and high-performance web applications using
           React, Next.js, Node.js and MongoDB.
@@ -250,8 +255,14 @@ export default function Home() {
         <h3 className="text-3xl font-semibold text-center mb-16">Skills</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {[
-            "React.js", "Next.js", "Node.js", "Express.js",
-            "MongoDB", "REST API", "JWT Auth", "API Integration",
+            "React.js",
+            "Next.js",
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+            "REST API",
+            "JWT Auth",
+            "API Integration",
           ].map((skill, index) => (
             <motion.div
               key={index}
@@ -260,7 +271,9 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className={`backdrop-blur-lg border p-6 rounded-2xl text-center shadow-xl transition-colors duration-500 ${
-                darkMode ? "bg-white/10 border-white/20" : "bg-black/5 border-black/10"
+                darkMode
+                  ? "bg-white/10 border-white/20"
+                  : "bg-black/5 border-black/10"
               }`}
             >
               {skill}
@@ -294,7 +307,9 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               className={`backdrop-blur-xl border p-8 rounded-2xl shadow-2xl transition-colors duration-500 ${
-                darkMode ? "bg-white/10 border-white/20" : "bg-white border-black/10"
+                darkMode
+                  ? "bg-white/10 border-white/20"
+                  : "bg-white border-black/10"
               }`}
             >
               <h4 className="text-xl font-bold mb-4">{project.title}</h4>
@@ -319,42 +334,55 @@ export default function Home() {
         <p className={`mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
           Let's build something amazing together.
         </p>
-        <div className="space-y-2">
-         <p>
-  Email:{" "}
-  <a
-    href="mailto:muhammadawaisjaved388@gmail.com"
-    className={`underline ${
-      darkMode
-        ? "text-indigo-400 hover:text-indigo-300"
-        : "text-indigo-600 hover:text-indigo-500"
-    }`}
-  >
-    muhammadawaisjaved388@gmail.com
-  </a>
-</p>
-          <p>
-            GitHub:{" "}
-            <a
-              href="https://github.com/awiasjaved"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`underline ${darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-500"}`}
-            >
-              github.com/awiasjaved
-            </a>
-          </p>
-          <p>
-            Linked In:{" "}
-            <a
-              href="https://www.linkedin.com/in/muhammad-awais-436459222/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`underline ${darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-500"}`}
-            >
-              Muhammad Awais
-            </a>
-          </p>
+        <div className="flex justify-center items-center gap-6 flex-wrap">
+          <a
+            href="mailto:muhammadawaisjaved388@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center"
+          >
+            <img
+              src="/images/Email.png"
+              alt="Email"
+              className="w-24 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
+            />
+          </a>
+          <a
+            href="https://github.com/awiasjaved"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center"
+          >
+            <img
+              src="/images/github.jpg"
+              alt="Linked In"
+              className="w-16 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muhammad-awais-436459222/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center"
+          >
+            <img
+              src="/images/linkedin.png"
+              alt="GitHub"
+              className="w-20 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
+            />
+          </a>
+          <a
+            href="https://wa.me/923057359818"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center"
+          >
+            <img
+              src="/images/whatsapp.png"
+              alt="Whatsapp"
+              className="w-18 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
+            />
+          </a>
         </div>
       </section>
     </main>
