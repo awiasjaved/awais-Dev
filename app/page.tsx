@@ -3,7 +3,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { FaReact, FaNodeJs } from "react-icons/fa";
-import { SiNextdotjs, SiExpress, SiMongodb, SiJsonwebtokens } from "react-icons/si";
+import {
+  SiNextdotjs,
+  SiExpress,
+  SiMongodb,
+  SiJsonwebtokens,
+  SiMysql,
+} from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 interface SmokeParticle {
   id: number;
@@ -252,7 +258,7 @@ export default function Home() {
         </motion.p>
       </section>
 
-     {/* SKILLS */}
+      {/* SKILLS */}
       <section className="px-6 py-24">
         <h3 className="text-3xl font-semibold text-center mb-16">Skills</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -263,7 +269,12 @@ export default function Home() {
             },
             {
               name: "Next.js",
-              icon: <SiNextdotjs size={36} className={darkMode ? "text-white" : "text-black"} />,
+              icon: (
+                <SiNextdotjs
+                  size={36}
+                  className={darkMode ? "text-white" : "text-black"}
+                />
+              ),
             },
             {
               name: "Node.js",
@@ -271,7 +282,12 @@ export default function Home() {
             },
             {
               name: "Express.js",
-              icon: <SiExpress size={36} className={darkMode ? "text-white" : "text-gray-800"} />,
+              icon: (
+                <SiExpress
+                  size={36}
+                  className={darkMode ? "text-white" : "text-gray-800"}
+                />
+              ),
             },
             {
               name: "MongoDB",
@@ -289,9 +305,19 @@ export default function Home() {
               name: "API Integration",
               icon: (
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                  <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+                    stroke="#38BDF8"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               ),
+            },
+            {
+              name: "MySQL",
+              icon: <SiMysql size={36} color="#4479A1" />,
             },
           ].map((skill, index) => (
             <motion.div
