@@ -199,7 +199,7 @@ export default function Home() {
           />
 
           {/* Main Name */}
-          <h1 className="text-7xl font-bold">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight break-words">
             MUHAMMAD AWAIS
            
           </h1>
@@ -276,7 +276,7 @@ export default function Home() {
         }`}
       >
         <h3 className="text-3xl font-semibold text-center mb-16">Projects</h3>
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
           {[
             {
               title: "Admin Dashboard",
@@ -285,10 +285,6 @@ export default function Home() {
             {
               title: "E-commerce API",
               desc: "REST API with cart, orders and secure payment integration.",
-            },
-            {
-              title: "QR Scanner App",
-              desc: "React Native app with QR scanning and secure login.",
             },
           ].map((project, index) => (
             <motion.div
