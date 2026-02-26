@@ -2,7 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
-
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { SiNextdotjs, SiExpress, SiMongodb, SiJsonwebtokens } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
 interface SmokeParticle {
   id: number;
   x: number;
@@ -250,19 +252,47 @@ export default function Home() {
         </motion.p>
       </section>
 
-      {/* SKILLS */}
+     {/* SKILLS */}
       <section className="px-6 py-24">
         <h3 className="text-3xl font-semibold text-center mb-16">Skills</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {[
-            "React.js",
-            "Next.js",
-            "Node.js",
-            "Express.js",
-            "MongoDB",
-            "REST API",
-            "JWT Auth",
-            "API Integration",
+            {
+              name: "React.js",
+              icon: <FaReact size={36} color="#61DAFB" />,
+            },
+            {
+              name: "Next.js",
+              icon: <SiNextdotjs size={36} className={darkMode ? "text-white" : "text-black"} />,
+            },
+            {
+              name: "Node.js",
+              icon: <FaNodeJs size={36} color="#68A063" />,
+            },
+            {
+              name: "Express.js",
+              icon: <SiExpress size={36} className={darkMode ? "text-white" : "text-gray-800"} />,
+            },
+            {
+              name: "MongoDB",
+              icon: <SiMongodb size={36} color="#47A248" />,
+            },
+            {
+              name: "REST API",
+              icon: <TbApi size={36} color="#F97316" />,
+            },
+            {
+              name: "JWT Auth",
+              icon: <SiJsonwebtokens size={36} color="#D63AFF" />,
+            },
+            {
+              name: "API Integration",
+              icon: (
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              ),
+            },
           ].map((skill, index) => (
             <motion.div
               key={index}
@@ -270,13 +300,14 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`backdrop-blur-lg border p-6 rounded-2xl text-center shadow-xl transition-colors duration-500 ${
+              className={`backdrop-blur-lg border p-6 rounded-2xl text-center shadow-xl transition-colors duration-500 flex flex-col items-center gap-3 ${
                 darkMode
                   ? "bg-white/10 border-white/20"
                   : "bg-black/5 border-black/10"
               }`}
             >
-              {skill}
+              {skill.icon}
+              <span className="text-sm font-medium">{skill.name}</span>
             </motion.div>
           ))}
         </div>
@@ -329,7 +360,7 @@ export default function Home() {
           transition={{ duration: 1 }}
           className="text-3xl font-semibold mb-6"
         >
-          Contact Me
+          Contact US
         </motion.h3>
         <p className={`mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
           Let's build something amazing together.
