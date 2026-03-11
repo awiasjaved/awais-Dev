@@ -9,6 +9,14 @@ import {
   SiMongodb,
   SiJsonwebtokens,
   SiMysql,
+  SiGithub,
+  SiGit,
+  SiPython,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiTailwindcss,
+
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 interface SmokeParticle {
@@ -167,31 +175,73 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
-      {/* DARK MODE TOGGLE */}
-      <div className="fixed top-5 right-6 z-50">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className={`relative w-16 h-8 rounded-full transition-colors duration-500 focus:outline-none shadow-lg border cursor-pointer ${
+      
+
+       {/* NAVBAR — Pill style like screenshot */}
+      <div className="fixed top-0 left-0 w-full z-50 px-6 pt-5">
+        <nav
+          className={`max-w-6xl mx-auto rounded-2xl border px-8 py-4 flex items-center justify-between transition-all duration-500 backdrop-blur-xl ${
             darkMode
-              ? "bg-gray-700 border-gray-600"
-              : "bg-yellow-300 border-yellow-400"
+              ? "bg-[#0e0e0e]/90 border-white/10 shadow-[0_4px_40px_rgba(0,0,0,0.7)]"
+              : "bg-white/90 border-black/10 shadow-[0_4px_40px_rgba(0,0,0,0.1)]"
           }`}
-          aria-label="Toggle Dark Mode"
         >
-          <span
-            className={`absolute top-1 left-1 w-6 h-6 rounded-full flex items-center justify-center text-sm transition-all duration-500 shadow-md ${
-              darkMode
-                ? "translate-x-8 bg-indigo-500"
-                : "translate-x-0 bg-white"
+          {/* NAME */}
+          <h1
+            className={`text-sm md:text-base font-bold tracking-[0.2em] uppercase ${
+              darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            {darkMode ? "🌙" : "☀️"}
-          </span>
-        </button>
-      </div>
+            Muhammad Awais
+          </h1>
 
+          {/* NAV LINKS + DARK MODE TOGGLE */}
+          <div className="flex items-center gap-8">
+            {["ABOUT", "TECHNOLOGIES", "PROJECTS", "CONTACT"].map((link) => (
+              <a
+                key={link}
+                href={`#${link}`}
+                className={`text-xs font-semibold tracking-[0.15em] transition-colors duration-300 relative group ${
+                  darkMode
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-500 hover:text-gray-900"
+                }`}
+              >
+                {link}
+                {/* Hover underline */}
+                <span
+                  className={`absolute -bottom-0.5 left-0 w-full h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full ${
+                    darkMode ? "bg-violet-400" : "bg-orange-400"
+                  }`}
+                />
+              </a>
+            ))}
+
+            {/* DARK MODE TOGGLE — moved inside navbar */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`relative w-14 h-7 rounded-full transition-colors duration-500 focus:outline-none shadow-md border cursor-pointer flex-shrink-0 ${
+                darkMode
+                  ? "bg-gray-700 border-gray-600"
+                  : "bg-yellow-300 border-yellow-400"
+              }`}
+              aria-label="Toggle Dark Mode"
+            >
+              <span
+                className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all duration-500 shadow-md ${
+                  darkMode
+                    ? "translate-x-7 bg-indigo-500"
+                    : "translate-x-0 bg-white"
+                }`}
+              >
+                {darkMode ? "🌙" : "☀️"}
+              </span>
+            </button>
+          </div>
+        </nav>
+      </div>
       {/* HERO */}
-      <section className="flex flex-col items-center justify-center text-center px-6 py-32">
+      <section className="flex flex-col items-start justify-center text-left px-6 py-32 max-w-6xl mx-auto">
         {/* FANCY NAME */}
         <motion.div
           initial={{ opacity: 0, y: -50, scale: 0.85 }}
@@ -210,10 +260,6 @@ export default function Home() {
             }}
           />
 
-          {/* Main Name */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight break-words">
-            MUHAMMAD AWAIS
-          </h1>
 
           {/* Decorative underline */}
           <motion.div
@@ -238,7 +284,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className={`text-2xl md:text-3xl mb-6 ${
+          className={`text-1xl md:text-2xl mb-6 ${
             darkMode ? "text-gray-400" : "text-gray-500"
           }`}
         >
@@ -250,10 +296,10 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
           className={
-            darkMode ? "max-w-2xl text-gray-500" : "max-w-2xl text-gray-600"
+            darkMode ? "max-w-1xl text-gray-500" : "max-w-1xl text-gray-600"
           }
         >
-          I build modern, scalable and high-performance web applications using
+          I build modern, scalable and high-performance web applications <br />  using
           React, Next.js, Node.js and MongoDB.
         </motion.p>
       </section>
@@ -319,6 +365,35 @@ export default function Home() {
               name: "MySQL",
               icon: <SiMysql size={36} color="#4479A1" />,
             },
+            {
+              name: "GITHUB",
+              icon: <SiGithub size={36} color="#333" />,
+            },
+            {
+              name: "GIT",
+              icon: <SiGit size={36} color="#333" />,
+            },
+            {
+              name: "Python",
+              icon: <SiPython size={36} color="#3776AB" />,
+            },
+            {
+              name: "HTML5",
+              icon: <SiHtml5 size={36} color="#E34C26" />,
+            },
+            {
+              name: "CSS3",
+              icon: <SiCss3 size={36} color="#264DE4" />,
+            },
+            {
+              name: "JavaScript",
+              icon: <SiJavascript size={36} color="#F7DF1E" />,
+            },
+            {
+              name: "tailwindcss",
+              icon: <SiTailwindcss size={36} color="#06B6D4" />,
+            },
+            
           ].map((skill, index) => (
             <motion.div
               key={index}
