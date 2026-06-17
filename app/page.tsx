@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { FaReact, FaNodeJs, FaBars, FaTimes } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaBars, FaTimes, FaWhatsapp, FaExternalLinkAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import {
   SiNextdotjs,
   SiExpress,
@@ -17,7 +18,7 @@ import {
   SiCss3,
   SiJavascript,
   SiTailwindcss,
-
+  SiLinkedin,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 interface SmokeParticle {
@@ -313,10 +314,7 @@ export default function Home() {
         </AnimatePresence>
       </div>
       {/* HERO */}
-      <section
-        id="ABOUT"
-        className="flex flex-col justify-center px-6 py-28 md:py-32 max-w-6xl mx-auto"
-      >
+      <section className="flex flex-col justify-center px-6 py-28 md:py-32 max-w-6xl mx-auto">
         <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
           {/* TEXT CONTENT */}
           <div className="flex-1 text-center md:text-left order-2 md:order-1">
@@ -433,218 +431,620 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section id="TECHNOLOGIES" className="px-6 py-24">
-        <h3 className="text-3xl font-semibold text-center mb-16">Skills</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              name: "React.js",
-              icon: <FaReact size={36} color="#61DAFB" />,
-            },
-            {
-              name: "Next.js",
-              icon: (
-                <SiNextdotjs
-                  size={36}
-                  className={darkMode ? "text-white" : "text-black"}
-                />
-              ),
-            },
-            {
-              name: "Node.js",
-              icon: <FaNodeJs size={36} color="#68A063" />,
-            },
-            {
-              name: "Express.js",
-              icon: (
-                <SiExpress
-                  size={36}
-                  className={darkMode ? "text-white" : "text-gray-800"}
-                />
-              ),
-            },
-            {
-              name: "MongoDB",
-              icon: <SiMongodb size={36} color="#47A248" />,
-            },
-            {
-              name: "REST API",
-              icon: <TbApi size={36} color="#F97316" />,
-            },
-            {
-              name: "JWT Auth",
-              icon: <SiJsonwebtokens size={36} color="#D63AFF" />,
-            },
-            {
-              name: "API Integration",
-              icon: (
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
-                    stroke="#38BDF8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ),
-            },
-            {
-              name: "MySQL",
-              icon: <SiMysql size={36} color="#4479A1" />,
-            },
-            {
-              name: "GITHUB",
-              icon: <SiGithub size={36} color="#333" />,
-            },
-            {
-              name: "GIT",
-              icon: <SiGit size={36} color="#333" />,
-            },
-            {
-              name: "Python",
-              icon: <SiPython size={36} color="#3776AB" />,
-            },
-            {
-              name: "HTML5",
-              icon: <SiHtml5 size={36} color="#E34C26" />,
-            },
-            {
-              name: "CSS3",
-              icon: <SiCss3 size={36} color="#264DE4" />,
-            },
-            {
-              name: "JavaScript",
-              icon: <SiJavascript size={36} color="#F7DF1E" />,
-            },
-            {
-              name: "tailwindcss",
-              icon: <SiTailwindcss size={36} color="#06B6D4" />,
-            },
-            
-          ].map((skill, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.08 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`backdrop-blur-lg border p-6 rounded-2xl text-center shadow-xl transition-colors duration-500 flex flex-col items-center gap-3 ${
+      {/* ABOUT */}
+      <section id="ABOUT" className="scroll-mt-28 px-6 py-20 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-3xl md:text-4xl font-semibold mb-4">About Me</h3>
+            <div
+              className={`h-1 w-20 mx-auto rounded-full ${
                 darkMode
-                  ? "bg-white/10 border-white/20"
-                  : "bg-black/5 border-black/10"
+                  ? "bg-gradient-to-r from-violet-400 to-cyan-400"
+                  : "bg-gradient-to-r from-violet-600 to-orange-500"
+              }`}
+            />
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className={`space-y-5 text-base md:text-lg leading-relaxed ${
+                darkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              {skill.icon}
-              <span className="text-sm font-medium">{skill.name}</span>
+              <p>
+                Hi, I&apos;m{" "}
+                <span
+                  className={`font-semibold ${
+                    darkMode ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  Muhammad Awais
+                </span>
+                , a passionate MERN Stack Developer focused on building modern,
+                scalable, and high-performance web applications. I enjoy turning
+                ideas into clean, user-friendly digital products that solve
+                real-world problems.
+              </p>
+              <p>
+                I work across the full stack — from responsive frontends with
+                React &amp; Next.js to robust backends using Node.js, Express,
+                and MongoDB. I have hands-on experience with REST APIs, JWT
+                authentication, admin dashboards, and e-commerce solutions.
+                I&apos;m always learning new tools and best practices to deliver
+                better results.
+              </p>
+              <p
+                className={`font-medium ${
+                  darkMode ? "text-violet-300" : "text-violet-700"
+                }`}
+              >
+                Currently open to freelance projects and full-time opportunities.
+              </p>
             </motion.div>
-          ))}
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              {[
+                { label: "Stack", value: "MERN" },
+                { label: "Focus", value: "Full-Stack" },
+                { label: "Build", value: "Web Apps" },
+                { label: "Status", value: "Available" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className={`backdrop-blur-lg border p-5 rounded-2xl text-center shadow-lg transition-colors duration-500 ${
+                    darkMode
+                      ? "bg-white/10 border-white/20"
+                      : "bg-black/5 border-black/10"
+                  }`}
+                >
+                  <p
+                    className={`text-xs font-semibold tracking-widest uppercase mb-2 ${
+                      darkMode ? "text-gray-500" : "text-gray-400"
+                    }`}
+                  >
+                    {item.label}
+                  </p>
+                  <p
+                    className={`text-lg font-bold ${
+                      darkMode ? "text-white" : "text-gray-900"
+                    }`}
+                  >
+                    {item.value}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* TECHNOLOGIES */}
+      <section
+        id="TECHNOLOGIES"
+        className={`scroll-mt-28 px-6 py-20 md:py-24 transition-colors duration-500 ${
+          darkMode ? "bg-black/30" : "bg-black/5"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-6"
+          >
+            <h3 className="text-3xl md:text-4xl font-semibold mb-4">
+              Technologies
+            </h3>
+            <div
+              className={`h-1 w-20 mx-auto rounded-full mb-6 ${
+                darkMode
+                  ? "bg-gradient-to-r from-violet-400 to-cyan-400"
+                  : "bg-gradient-to-r from-violet-600 to-orange-500"
+              }`}
+            />
+            <p
+              className={`max-w-2xl mx-auto text-base md:text-lg ${
+                darkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Tools and technologies I use to build fast, scalable, and
+              modern web applications.
+            </p>
+          </motion.div>
+
+          <div className="space-y-12 mt-12">
+            {[
+              {
+                title: "Frontend",
+                skills: [
+                  { name: "React.js", icon: <FaReact size={36} color="#61DAFB" /> },
+                  {
+                    name: "Next.js",
+                    icon: (
+                      <SiNextdotjs
+                        size={36}
+                        className={darkMode ? "text-white" : "text-black"}
+                      />
+                    ),
+                  },
+                  { name: "HTML5", icon: <SiHtml5 size={36} color="#E34C26" /> },
+                  { name: "CSS3", icon: <SiCss3 size={36} color="#264DE4" /> },
+                  { name: "JavaScript", icon: <SiJavascript size={36} color="#F7DF1E" /> },
+                  { name: "Tailwind CSS", icon: <SiTailwindcss size={36} color="#06B6D4" /> },
+                ],
+              },
+              {
+                title: "Backend",
+                skills: [
+                  { name: "Node.js", icon: <FaNodeJs size={36} color="#68A063" /> },
+                  {
+                    name: "Express.js",
+                    icon: (
+                      <SiExpress
+                        size={36}
+                        className={darkMode ? "text-white" : "text-gray-800"}
+                      />
+                    ),
+                  },
+                  { name: "Python", icon: <SiPython size={36} color="#3776AB" /> },
+                  { name: "JWT Auth", icon: <SiJsonwebtokens size={36} color="#D63AFF" /> },
+                ],
+              },
+              {
+                title: "Database & API",
+                skills: [
+                  { name: "MongoDB", icon: <SiMongodb size={36} color="#47A248" /> },
+                  { name: "MySQL", icon: <SiMysql size={36} color="#4479A1" /> },
+                  { name: "REST API", icon: <TbApi size={36} color="#F97316" /> },
+                  {
+                    name: "API Integration",
+                    icon: (
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+                          stroke="#38BDF8"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    ),
+                  },
+                ],
+              },
+              {
+                title: "Tools",
+                skills: [
+                  { name: "GitHub", icon: <SiGithub size={36} color="#333" /> },
+                  { name: "Git", icon: <SiGit size={36} color="#333" /> },
+                ],
+              },
+            ].map((group, groupIndex) => (
+              <motion.div
+                key={group.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
+              >
+                <h4
+                  className={`text-lg font-semibold mb-6 tracking-wide ${
+                    darkMode ? "text-violet-300" : "text-violet-700"
+                  }`}
+                >
+                  {group.title}
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                  {group.skills.map((skill) => (
+                    <motion.div
+                      key={skill.name}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className={`backdrop-blur-lg border p-5 rounded-2xl text-center shadow-lg transition-colors duration-500 flex flex-col items-center gap-3 ${
+                        darkMode
+                          ? "bg-white/10 border-white/20 hover:border-violet-400/40"
+                          : "bg-white border-black/10 hover:border-violet-400/40"
+                      }`}
+                    >
+                      {skill.icon}
+                      <span className="text-sm font-medium">{skill.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* PROJECTS */}
       <section
         id="PROJECTS"
-        className={`px-6 py-24 backdrop-blur-lg transition-colors duration-500 ${
+        className={`scroll-mt-28 px-6 py-20 md:py-24 transition-colors duration-500 ${
           darkMode ? "bg-black/40" : "bg-black/5"
         }`}
       >
-        <h3 className="text-3xl font-semibold text-center mb-16">Projects</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
-          {[
-            {
-              title: "Admin Dashboard",
-              desc: "Full-stack admin panel with authentication, CRUD operations and analytics.",
-            },
-            {
-              title: "E-commerce API",
-              desc: "REST API with cart, orders and secure payment integration.",
-            },
-          ].map((project, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className={`backdrop-blur-xl border p-8 rounded-2xl shadow-2xl transition-colors duration-500 ${
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-3xl md:text-4xl font-semibold mb-4">Projects</h3>
+            <div
+              className={`h-1 w-20 mx-auto rounded-full mb-6 ${
                 darkMode
-                  ? "bg-white/10 border-white/20"
-                  : "bg-white border-black/10"
+                  ? "bg-gradient-to-r from-violet-400 to-cyan-400"
+                  : "bg-gradient-to-r from-violet-600 to-orange-500"
+              }`}
+            />
+            <p
+              className={`max-w-2xl mx-auto text-base md:text-lg ${
+                darkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              <h4 className="text-xl font-bold mb-4">{project.title}</h4>
-              <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
-                {project.desc}
-              </p>
-            </motion.div>
-          ))}
+              A selection of projects I&apos;ve built — focused on real-world
+              functionality, clean code, and great user experience.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Al-Saeed Foundation",
+                desc: "A full charity foundation website for education, healthcare, and social welfare. Features donation system, bilingual content (English/Urdu), school information, and responsive design for community outreach.",
+                tech: ["Next.js", "React", "Tailwind CSS", "Responsive"],
+                image: "/images/alsaeedfoundation.png",
+                link: "https://al-saeed-foundation.vercel.app/",
+                badge: "Live Project",
+              },
+              {
+                title: "Al-Saeed Admin Dashboard",
+                desc: "A full-stack admin panel for managing foundation data with secure login, role-based access, CRUD operations, data tables, and analytics for efficient content and user management.",
+                tech: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+                image: "/images/alsaeed-adminportal.png",
+                badge: "Admin Dashboard",
+              },
+              {
+                title: "Little Mu'mins",
+                desc: "An e-commerce book shop for Islamic children's books with product catalog, cart system, category filters by age and type, and a warm, child-friendly design for nurturing young hearts.",
+                tech: ["Next.js", "React", "E-commerce", "Responsive"],
+                image: "/images/littlemumins.png",
+                link: "https://little-mumins.vercel.app/",
+                badge: "Live Project",
+              },
+            ].map((project, index) => {
+              const cardClass = `backdrop-blur-xl border rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 flex flex-col w-full ${
+                project.link ? "cursor-pointer" : ""
+              } ${
+                darkMode
+                  ? "bg-white/10 border-white/20 hover:border-violet-400/30"
+                  : "bg-white border-black/10 hover:border-violet-400/30"
+              }`;
+
+              const cardContent = (
+                <>
+                  <div className="relative w-full aspect-video overflow-hidden group">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t ${
+                        darkMode
+                          ? "from-black/70 via-black/20 to-transparent"
+                          : "from-black/50 via-black/10 to-transparent"
+                      }`}
+                    />
+                    {project.link && (
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30">
+                        <span className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/95 text-gray-900 text-sm font-semibold shadow-lg">
+                          Visit Website
+                          <FaExternalLinkAlt size={12} />
+                        </span>
+                      </div>
+                    )}
+                    <span
+                      className={`absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full ${
+                        darkMode
+                          ? "bg-violet-500/30 text-violet-200 backdrop-blur-sm"
+                          : "bg-white/90 text-violet-700"
+                      }`}
+                    >
+                      {project.badge}
+                    </span>
+                  </div>
+
+                  <div className="p-6 md:p-8 flex flex-col flex-1">
+                    <h4 className="text-xl md:text-2xl font-bold mb-3">
+                      {project.title}
+                    </h4>
+
+                    <p
+                      className={`mb-5 leading-relaxed flex-1 text-sm md:text-base ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      {project.desc}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tag) => (
+                        <span
+                          key={tag}
+                          className={`text-xs font-medium px-3 py-1 rounded-full ${
+                            darkMode
+                              ? "bg-white/10 text-gray-300 border border-white/10"
+                              : "bg-black/5 text-gray-700 border border-black/10"
+                          }`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              );
+
+              return project.link ? (
+                <motion.a
+                  key={project.title}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  whileHover={{ y: -6 }}
+                  className={cardClass}
+                >
+                  {cardContent}
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  whileHover={{ y: -6 }}
+                  className={cardClass}
+                >
+                  {cardContent}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={`mt-12 rounded-2xl border p-6 md:p-8 ${
+              darkMode ? "bg-white/5 border-white/10" : "bg-white border-black/10"
+            }`}
+          >
+            <h4
+              className={`text-xl md:text-2xl font-semibold mb-3 ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Additional GitHub Projects
+            </h4>
+            <p className={`mb-6 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              Note: only `AdaxionTech` repositories are company projects. Others
+              are personal/collaboration repositories.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {[
+                {
+                  url: "https://github.com/awiasjaved/alsaeed_back",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/alsaeed_portal",
+                  company: false,
+                },
+                { url: "https://github.com/awiasjaved/awais-Dev", company: false },
+                {
+                  url: "https://github.com/awiasjaved/ai-recruitment-platform-frontend",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/sohail-autos-toba",
+                  company: false,
+                },
+                { url: "https://github.com/awiasjaved/DevSpire", company: false },
+                {
+                  url: "https://github.com/awiasjaved/yaseen_backend",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/ALSaeed_Foundation",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/phrmacy_app",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/little_mumins",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/awiasjaved/little_mumins_backend",
+                  company: false,
+                },
+                {
+                  url: "https://github.com/AdaxionTech/heyginie_backend",
+                  company: true,
+                },
+                {
+                  url: "https://github.com/AdaxionTech/partner_portal",
+                  company: true,
+                },
+              ].map((repo) => (
+                <a
+                  key={repo.url}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`rounded-xl border px-3 py-2 text-sm transition-colors break-all ${
+                    darkMode
+                      ? "border-white/10 bg-white/5 text-gray-300 hover:text-white hover:border-violet-400/40"
+                      : "border-black/10 bg-black/5 text-gray-700 hover:text-gray-900 hover:border-violet-400/40"
+                  }`}
+                >
+                  {repo.url.replace("https://github.com/", "")}
+                  {repo.company ? " (Company)" : ""}
+                </a>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="CONTACT" className="px-6 py-24 text-center">
-        <motion.h3
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-3xl font-semibold mb-6"
-        >
-          Contact US
-        </motion.h3>
-        <p className={`mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-          Let's build something amazing together.
-        </p>
-        <div className="flex justify-center items-center gap-6 flex-wrap">
-          <a
-            href="mailto:muhammadawaisjaved388@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center"
+      <section
+        id="CONTACT"
+        className={`scroll-mt-28 px-6 py-20 md:py-24 transition-colors duration-500 ${
+          darkMode ? "bg-black/30" : "bg-black/5"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-12"
           >
-            <img
-              src="/images/Email.png"
-              alt="Email"
-              className="w-24 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
+            <h3 className="text-3xl md:text-4xl font-semibold mb-4">
+              Contact Me
+            </h3>
+            <div
+              className={`h-1 w-20 mx-auto rounded-full mb-6 ${
+                darkMode
+                  ? "bg-gradient-to-r from-violet-400 to-cyan-400"
+                  : "bg-gradient-to-r from-violet-600 to-orange-500"
+              }`}
             />
-          </a>
-          <a
-            href="https://github.com/awiasjaved"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center"
+            <p
+              className={`max-w-2xl mx-auto text-base md:text-lg ${
+                darkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Have a project in mind or want to collaborate? Feel free to reach
+              out — I&apos;m always open to discussing new opportunities.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                label: "Email",
+                value: "muhammadawaisjaved388@gmail.com",
+                href: "mailto:muhammadawaisjaved388@gmail.com",
+                icon: <MdEmail size={32} className="text-red-500" />,
+              },
+              {
+                label: "GitHub",
+                value: "awiasjaved",
+                href: "https://github.com/awiasjaved",
+                icon: (
+                  <SiGithub
+                    size={32}
+                    className={darkMode ? "text-white" : "text-gray-900"}
+                  />
+                ),
+              },
+              {
+                label: "LinkedIn",
+                value: "Muhammad Awais",
+                href: "https://www.linkedin.com/in/muhammad-awais-436459222/",
+                icon: <SiLinkedin size={32} className="text-blue-500" />,
+              },
+              {
+                label: "WhatsApp",
+                value: "+92 305 7359818",
+                href: "https://wa.me/923057359818",
+                icon: <FaWhatsapp size={32} className="text-green-500" />,
+              },
+            ].map((contact, index) => (
+              <motion.a
+                key={contact.label}
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -4 }}
+                className={`backdrop-blur-lg border p-6 rounded-2xl shadow-lg transition-colors duration-500 flex flex-col items-center gap-3 text-center ${
+                  darkMode
+                    ? "bg-white/10 border-white/20 hover:border-violet-400/40"
+                    : "bg-white border-black/10 hover:border-violet-400/40"
+                }`}
+              >
+                <div
+                  className={`w-14 h-14 rounded-full flex items-center justify-center ${
+                    darkMode ? "bg-white/5" : "bg-black/5"
+                  }`}
+                >
+                  {contact.icon}
+                </div>
+                <p
+                  className={`text-sm font-semibold tracking-wide uppercase ${
+                    darkMode ? "text-violet-300" : "text-violet-700"
+                  }`}
+                >
+                  {contact.label}
+                </p>
+                <p
+                  className={`text-xs md:text-sm break-all ${
+                    darkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  {contact.value}
+                </p>
+              </motion.a>
+            ))}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className={`mt-12 text-sm ${
+              darkMode ? "text-gray-500" : "text-gray-500"
+            }`}
           >
-            <img
-              src="/images/github.jpg"
-              alt="Linked In"
-              className="w-16 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/muhammad-awais-436459222/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center"
-          >
-            <img
-              src="/images/linkedin.png"
-              alt="GitHub"
-              className="w-20 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
-            />
-          </a>
-          <a
-            href="https://wa.me/923057359818"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center"
-          >
-            <img
-              src="/images/whatsapp.png"
-              alt="Whatsapp"
-              className="w-18 rounded-xl hover:scale-105 transition duration-300 shadow-lg"
-            />
-          </a>
+            Let&apos;s build something amazing together.
+          </motion.p>
         </div>
       </section>
     </main>
