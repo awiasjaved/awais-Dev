@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { FaReact, FaNodeJs } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaBars, FaTimes } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiExpress,
@@ -53,6 +54,7 @@ const LIGHT_COLORS = [
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [particles, setParticles] = useState<SmokeParticle[]>([]);
   const [cursor, setCursor] = useState({ x: -100, y: -100 });
   const [cursorColor, setCursorColor] = useState("rgba(139,92,246,1)");
@@ -178,9 +180,9 @@ export default function Home() {
       
 
        {/* NAVBAR — Pill style like screenshot */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 pt-5">
+      <div className="fixed top-0 left-0 w-full z-50 px-4 md:px-6 pt-5">
         <nav
-          className={`max-w-6xl mx-auto rounded-2xl border px-8 py-4 flex items-center justify-between transition-all duration-500 backdrop-blur-xl ${
+          className={`max-w-6xl mx-auto rounded-2xl border px-4 md:px-8 py-4 flex items-center justify-between transition-all duration-500 backdrop-blur-xl ${
             darkMode
               ? "bg-[#0e0e0e]/90 border-white/10 shadow-[0_4px_40px_rgba(0,0,0,0.7)]"
               : "bg-white/90 border-black/10 shadow-[0_4px_40px_rgba(0,0,0,0.1)]"
@@ -195,8 +197,8 @@ export default function Home() {
             Muhammad Awais
           </h1>
 
-          {/* NAV LINKS + DARK MODE TOGGLE */}
-          <div className="flex items-center gap-8">
+          {/* DESKTOP NAV LINKS + DARK MODE TOGGLE */}
+          <div className="hidden md:flex items-center gap-8">
             {["ABOUT", "TECHNOLOGIES", "PROJECTS", "CONTACT"].map((link) => (
               <a
                 key={link}
@@ -208,7 +210,6 @@ export default function Home() {
                 }`}
               >
                 {link}
-                {/* Hover underline */}
                 <span
                   className={`absolute -bottom-0.5 left-0 w-full h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full ${
                     darkMode ? "bg-violet-400" : "bg-orange-400"
@@ -217,7 +218,6 @@ export default function Home() {
               </a>
             ))}
 
-            {/* DARK MODE TOGGLE — moved inside navbar */}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className={`relative w-14 h-7 rounded-full transition-colors duration-500 focus:outline-none shadow-md border cursor-pointer flex-shrink-0 ${
@@ -238,74 +238,203 @@ export default function Home() {
               </span>
             </button>
           </div>
+
+          {/* MOBILE — DARK MODE + MENU BUTTON */}
+          <div className="flex md:hidden items-center gap-3">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`relative w-12 h-6 rounded-full transition-colors duration-500 focus:outline-none shadow-md border cursor-pointer flex-shrink-0 ${
+                darkMode
+                  ? "bg-gray-700 border-gray-600"
+                  : "bg-yellow-300 border-yellow-400"
+              }`}
+              aria-label="Toggle Dark Mode"
+            >
+              <span
+                className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] transition-all duration-500 shadow-md ${
+                  darkMode
+                    ? "translate-x-6 bg-indigo-500"
+                    : "translate-x-0 bg-white"
+                }`}
+              >
+                {darkMode ? "🌙" : "☀️"}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                darkMode
+                  ? "text-white hover:bg-white/10"
+                  : "text-gray-900 hover:bg-black/5"
+              }`}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            </button>
+          </div>
         </nav>
+
+        {/* MOBILE MENU DROPDOWN */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -8, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className={`md:hidden max-w-6xl mx-auto mt-2 rounded-2xl border overflow-hidden backdrop-blur-xl ${
+                darkMode
+                  ? "bg-[#0e0e0e]/95 border-white/10 shadow-[0_4px_40px_rgba(0,0,0,0.7)]"
+                  : "bg-white/95 border-black/10 shadow-[0_4px_40px_rgba(0,0,0,0.1)]"
+              }`}
+            >
+              <div className="flex flex-col py-2">
+                {["ABOUT", "TECHNOLOGIES", "PROJECTS", "CONTACT"].map(
+                  (link) => (
+                    <a
+                      key={link}
+                      href={`#${link}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`px-6 py-3 text-sm font-semibold tracking-[0.15em] transition-colors duration-300 ${
+                        darkMode
+                          ? "text-gray-400 hover:text-white hover:bg-white/5"
+                          : "text-gray-500 hover:text-gray-900 hover:bg-black/5"
+                      }`}
+                    >
+                      {link}
+                    </a>
+                  ),
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       {/* HERO */}
-      <section className="flex flex-col items-start justify-center text-left px-6 py-32 max-w-6xl mx-auto">
-        {/* FANCY NAME */}
-        <motion.div
-          initial={{ opacity: 0, y: -50, scale: 0.85 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-6 relative"
-        >
-          {/* Glow behind name */}
-          <div
-            className="absolute inset-0 blur-3xl opacity-40 rounded-full"
-            style={{
-              background: darkMode
-                ? "radial-gradient(ellipse, rgba(139,92,246,0.6) 0%, rgba(59,130,246,0.4) 50%, transparent 70%)"
-                : "radial-gradient(ellipse, rgba(249,115,22,0.5) 0%, rgba(234,179,8,0.4) 50%, transparent 70%)",
-              transform: "scale(1.4)",
-            }}
-          />
+      <section
+        id="ABOUT"
+        className="flex flex-col justify-center px-6 py-28 md:py-32 max-w-6xl mx-auto"
+      >
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
+          {/* TEXT CONTENT */}
+          <div className="flex-1 text-center md:text-left order-2 md:order-1">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Muhammad{" "}
+              <span
+                className={
+                  darkMode
+                    ? "bg-gradient-to-r from-violet-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-violet-600 via-orange-500 to-pink-600 bg-clip-text text-transparent"
+                }
+              >
+                Awais
+              </span>
+            </motion.h1>
 
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.15 }}
+              className={`text-xl md:text-2xl lg:text-3xl mb-6 font-medium ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              MERN Stack Developer
+            </motion.h2>
 
-          {/* Decorative underline */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              className={`h-1 w-24 md:w-32 mb-6 mx-auto md:mx-0 rounded-full ${
+                darkMode
+                  ? "bg-gradient-to-r from-violet-400 to-cyan-400"
+                  : "bg-gradient-to-r from-violet-600 to-orange-500"
+              }`}
+            />
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className={`text-base md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0 ${
+                darkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              I build modern, scalable and high-performance web applications
+              using React, Next.js, Node.js and MongoDB.
+            </motion.p>
+          </div>
+
+          {/* PROFILE IMAGE */}
           <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-            className="mt-3 mx-auto rounded-full"
-            style={{
-              height: "3px",
-              width: "60%",
-              background: darkMode
-                ? "linear-gradient(90deg, transparent, #a78bfa, #67e8f9, transparent)"
-                : "linear-gradient(90deg, transparent, #7c3aed, #db2777, transparent)",
-              boxShadow: darkMode
-                ? "0 0 12px rgba(167,139,250,0.8)"
-                : "0 0 12px rgba(124,58,237,0.6)",
-            }}
-          />
-        </motion.div>
+            initial={{ opacity: 0, scale: 0.85, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+            className="relative flex-shrink-0 order-1 md:order-2"
+          >
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+            >
+              <div
+                className="absolute -inset-3 rounded-full blur-2xl opacity-50"
+                style={{
+                  background: darkMode
+                    ? "linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899)"
+                    : "linear-gradient(135deg, #7c3aed, #f97316, #db2777)",
+                }}
+              />
 
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className={`text-1xl md:text-2xl mb-6 ${
-            darkMode ? "text-gray-400" : "text-gray-500"
-          }`}
-        >
-          MERN Stack React & Node.js Developer
-        </motion.h2>
+              <div
+                className={`relative p-1.5 rounded-full bg-gradient-to-br ${
+                  darkMode
+                    ? "from-violet-500 via-cyan-400 to-pink-500"
+                    : "from-violet-600 via-orange-500 to-pink-600"
+                } shadow-2xl`}
+              >
+                <div
+                  className={`rounded-full p-1 ${
+                    darkMode ? "bg-gray-900" : "bg-white"
+                  }`}
+                >
+                  <Image
+                    src="/images/awais-Dev.png"
+                    alt="Muhammad Awais - MERN Stack Developer"
+                    width={280}
+                    height={280}
+                    priority
+                    className="w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full object-cover object-top"
+                  />
+                </div>
+              </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className={
-            darkMode ? "max-w-1xl text-gray-500" : "max-w-1xl text-gray-600"
-          }
-        >
-          I build modern, scalable and high-performance web applications <br />  using
-          React, Next.js, Node.js and MongoDB.
-        </motion.p>
+              <div
+                className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider whitespace-nowrap shadow-lg border ${
+                  darkMode
+                    ? "bg-gray-900/90 border-white/10 text-violet-300"
+                    : "bg-white/90 border-black/10 text-violet-700"
+                }`}
+              >
+                Available for Work
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* SKILLS */}
-      <section className="px-6 py-24">
+      <section id="TECHNOLOGIES" className="px-6 py-24">
         <h3 className="text-3xl font-semibold text-center mb-16">Skills</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {[
@@ -416,6 +545,7 @@ export default function Home() {
 
       {/* PROJECTS */}
       <section
+        id="PROJECTS"
         className={`px-6 py-24 backdrop-blur-lg transition-colors duration-500 ${
           darkMode ? "bg-black/40" : "bg-black/5"
         }`}
@@ -454,7 +584,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section className="px-6 py-24 text-center">
+      <section id="CONTACT" className="px-6 py-24 text-center">
         <motion.h3
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
